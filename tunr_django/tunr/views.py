@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from .models import Artist, Song
-
+from .forms import ArtistForm, SongForm
 # this is our db query like saying artist.find in mongoose
 
 # we are injecting this into our db with a template we have not created yet that will render when this function is called
@@ -23,7 +23,7 @@ def song_list(request):
 # song show route
 def song_detail(request, id):
   song = Song.objects.get(id=id)
-  return render(request, 'jim/song_detail.html', {'song': song})
+  return render(request, 'tunr/song_detail.html', {'song': song})
 
 # artist show route
 def artist_detail(request, pk):
@@ -50,7 +50,7 @@ def song_create(request):
       return redirect('song_detail', id=song.id)
   else:
     form = SongForm()
-  return render(request, 'jim/song_form.html', {'form': form})
+  return render(request, 'tunr/song_form.html', {'form': form})
 
 # artist edit route
 def artist_edit(request, pk):
@@ -62,7 +62,7 @@ def artist_edit(request, pk):
       return redirect('artist_detail', pk=artist.pk)
   else:
     form = ArtistForm(instance=artist)
-  return render(request, 'jim/artist_form.html', {'form': form})
+  return render(request, 'tunr/artist_form.html', {'form': form})
 
 # song edit route
 def song_edit(request, id):
@@ -74,7 +74,7 @@ def song_edit(request, id):
       return redirect('song_detail', id=song.id)
   else:
     form = SongForm(instance=song)
-  return render(request, 'jim/song_form.html', {'form': form})
+  return render(request, 'tunr/song_form.html', {'form': form})
 
 # artist delete route
 def artist_delete(request, pk):
